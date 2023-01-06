@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <PublishChromeDriver>True</PublishChromeDriver>
     <IsPackable>false</IsPackable>
+    <GenerateProgramFile>false</GenerateProgramFile>
   </PropertyGroup>
 
   <ItemGroup>
