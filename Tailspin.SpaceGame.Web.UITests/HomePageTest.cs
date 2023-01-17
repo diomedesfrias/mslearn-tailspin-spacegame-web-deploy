@@ -27,11 +27,11 @@ namespace UITests
         {
              try
             {
-                // string path = "C:\\Users\\DiomedesFrias\\OneDrive - SmartLogix\\Desktop\\Learn\\Testing\\mslearn-tailspin-spacegame-web-deploy\\Tailspin.SpaceGame.Web.UITests\\bin\\Release\\net6.0";
-                // Environment.SetEnvironmentVariable("ChromeWebDriver", path);
-                // Environment.SetEnvironmentVariable("GeckoWebDriver", path);
-                // Environment.SetEnvironmentVariable("EdgeWebDriver", path);
-                // Environment.SetEnvironmentVariable("SITE_URL", "https://tailspin-spacegame-web.azurewebsites.net/");
+                //string path = "C:\\Users\\DiomedesFrias\\OneDrive - SmartLogix\\Desktop\\Learn\\Testing\\mslearn-tailspin-spacegame-web-deploy\\Tailspin.SpaceGame.Web.UITests\\bin\\Release\\net6.0";
+                //Environment.SetEnvironmentVariable("ChromeWebDriver", path);
+                //Environment.SetEnvironmentVariable("GeckoWebDriver", path);
+                //Environment.SetEnvironmentVariable("EdgeWebDriver", path);
+                //Environment.SetEnvironmentVariable("SITE_URL", "https://localhost:52115/");
 
                 // Create the driver for the current browser.
                 switch (browser)
@@ -43,7 +43,11 @@ namespace UITests
                     break;
                   case "Firefox":
                     driver = new FirefoxDriver(
-                        Environment.GetEnvironmentVariable("GeckoWebDriver")
+                        Environment.GetEnvironmentVariable("GeckoWebDriver"),
+                        new FirefoxOptions
+                        {
+                            AcceptInsecureCertificates = true
+                        }
                     );
                     break;
                   case "Edge":
