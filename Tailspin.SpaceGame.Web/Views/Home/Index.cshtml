@@ -2,16 +2,16 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<section class="intro">
+ 
     <div class="container">
-        <img class="title" src="/images/download.png" alt="Space Game">
-        <p>An example site for learning</p>
+        <img class="title" src="/images/1649787042040.jfif" style="width:100%; height:300px">
+      
     </div>
-</section>
+ 
 <section class="download">
     <div class="image-cap"></div>
     <div class="container">
-        <a href="" id="download-btn" class="btn btn-default btn-lg" data-toggle="modal" data-target="#pretend-modal">Download game</a>
+        <a href="" id="download-btn" class="btn btn-default btn-lg" data-toggle="modal" data-target="#pretend-modal">Descargar Catalogo de Salud</a>
     </div>
 </section>
 
@@ -31,18 +31,18 @@
 <section class="leaderboard">
     <div class="container">
         <a name="leaderboard"></a>
-        <h2>Space leaders</h2>
+        <h2>Proveedores Medicos</h2>
         <!-- Start Leaderboard table -->
         <div class="row">
             <div class="col-sm-9 leader-scores">
                 <div class="row high-score hidden-xs">
                     <div class="col-sm-1">
-                        Rank
+                        No.
                     </div>
                     <div class="col-sm-4">
-                        Player
+                        Nombre
                     </div>
-                    <div class="col-sm-2">
+@*                    <div class="col-sm-2">
                         Mode
                     </div>
                     <div class="col-sm-3">
@@ -50,7 +50,7 @@
                     </div>
                     <div class="col-sm-2">
                         Score
-                    </div>
+                    </div>*@
                 </div>
 
                 @{
@@ -77,15 +77,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-sm-2 score-data">
-                                @score.Score.GameMode
-                            </div>
-                            <div class="col-sm-3 score-data">
-                                @score.Score.GameRegion
-                            </div>
-                            <div class="col-sm-2 score-data">
-                                @score.Score.HighScore.ToString("N0")
-                            </div>
+
                         </div>
                     }
                 }
@@ -128,7 +120,7 @@
                 </nav>
             </div>
 
-            <div class="col-sm-3">
+@*            <div class="col-sm-3">
                 <div class="leader-nav hidden-xs">
                     <div class="row nav-buttons">
                         <h4>Mode</h4>
@@ -157,9 +149,9 @@
                                 }
                             }
                         </ul>
-                    </div>
+                    </div>*@
 
-                    <div class="row nav-buttons">
+@*                    <div class="row nav-buttons">
                         <h4>Galaxy</h4>
                         <ul>
                             @if (string.IsNullOrEmpty(Model.SelectedRegion))
@@ -185,7 +177,7 @@
                                 }
                             }
                         </ul>
-                    </div>
+                    </div>*@
                 </div>
             </div>
         </div>
@@ -194,7 +186,7 @@
 </section>
 
 <!-- About section -->
-<section class="about">
+@*<section class="about">
     <h2>More about Space Game</h2>
     <p>Space Game is an example website for learning purposes. Check out <a href="https://aka.ms/mslearndevops/">Microsoft Learn</a> to find out more.</p>
 </section>
@@ -208,9 +200,9 @@
             </ul>
         </div>
     </div>
-    <p>&copy; @DateTime.Now.Year - TailSpin Toys</p>
+    <p>&copy; @DateTime.Now.Year - MCS</p>
 </section>
-
+*@
 
 <!-- Modals -->
 <div class="modal fade" id="test-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -235,7 +227,7 @@
             </div>
             <div class="modal-body text-center">
                 <img src="/images/space-game-placeholder.svg" width="100%" alt="">
-                <p>Gamescreen example</p>
+                <p>Catalogo example</p>
             </div>
         </div>
     </div>
