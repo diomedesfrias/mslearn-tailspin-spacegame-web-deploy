@@ -61,10 +61,19 @@ stages:
         projects: '$(System.DefaultWorkingDirectory)/**/Tailspin.SpaceGame.Web.csproj' 
         publishWebProjects: false
         arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
-        zipAfterPublish: true
+        zipAfterPublish: false
 
-    - publish: '$(Build.ArtifactStagingDirectory)'
-      artifact: drop
+- task: DotNetCoreCLI@2 
+  displayName: 'dotnet publish test --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)' 
+  inputs: 
+    command: publish 
+    publishWebProjects: false 
+    projects: ''$(System.DefaultWorkingDirectory)/**/*UITests.csproj''  
+    arguments: '-p:PublishChromeDriver=true --runtime win-x64 --output $(Build.ArtifactStagingDirectory)/Tailspin.SpaceGame.Test/' 
+    zipAfterPublish: false
+
+- task: PublishBuildArtifacts@1 
+  displayName: 'publish artifacts' 
 
 - stage: 'Dev'
   displayName: 'Deploy to the dev environment'
