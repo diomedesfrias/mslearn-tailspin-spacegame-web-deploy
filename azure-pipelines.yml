@@ -60,7 +60,7 @@ stages:
         command: 'publish'
         projects: '$(System.DefaultWorkingDirectory)/**/Tailspin.SpaceGame.Web.csproj' 
         publishWebProjects: false
-        arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
+        arguments: '-p:PublishChromeDriver=true --no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
         zipAfterPublish: true
     - task: DotNetCoreCLI@2
       displayName: 'dotnet publish test --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)' 
