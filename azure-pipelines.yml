@@ -72,8 +72,7 @@ stages:
         zipAfterPublish: false
 
     - task: PublishBuildArtifacts@1
-    displayName: 'publish artifacts'
-
+    
 - stage: 'Dev'
   displayName: 'Deploy to the dev environment'
   dependsOn: Build
