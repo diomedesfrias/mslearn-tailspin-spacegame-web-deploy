@@ -20,7 +20,7 @@ public class Tests
     {
        // var bought = new Bought();
 
-        //var result = bought.IsBoughtBy(new User { customer = true });
+        // var result = bought.IsBoughtBy(new User { customer = true });
 
         Assert.IsTrue(true);
 
