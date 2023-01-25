@@ -12,7 +12,7 @@ namespace UITests
     [TestFixture("Chrome")]
     [TestFixture("Firefox")]
     [TestFixture("Edge")]
-    public class HomePageTest
+    public class HomePageTest 
     {
         private string browser;
         private IWebDriver driver;
@@ -31,7 +31,7 @@ namespace UITests
                 Environment.SetEnvironmentVariable("ChromeWebDriver", path);
                 Environment.SetEnvironmentVariable("GeckoWebDriver", path);
                 Environment.SetEnvironmentVariable("EdgeWebDriver", path);
-                Environment.SetEnvironmentVariable("SITE_URL", "https://localhost:50005/");
+                //Environment.SetEnvironmentVariable("SITE_URL", "https://localhost:50005/");
 
                 // Create the driver for the current browser.
                 switch (browser)
