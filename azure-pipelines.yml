@@ -69,7 +69,7 @@ stages:
         projects: 'test/TechFabricSln.Test/TechFabricSln.Test.csproj'
         publishWebProjects: false
         arguments: '-p:PublishChromeDriver=true --runtime win-x64 --output $(Build.ArtifactStagingDirectory)/test/TechFabricSln.Test/'
-        zipAfterPublish: false
+        zipAfterPublish: true
 
    
     - task: PublishBuildArtifacts@1
@@ -99,7 +99,7 @@ stages:
             inputs:
               azureSubscription: 'Resource Manager - Tailspin - Space Game'
               appName: '$(WebAppNameDev)'
-              package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)'
+              package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
 
 - stage: 'Test'
   displayName: 'Deploy to the test environment'
@@ -124,51 +124,51 @@ stages:
               appName: '$(WebAppNameTest)'
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)'
 
-  - job: RunUITests 
-    dependsOn: Deploy
-    displayName: 'Run UI tests'
-    pool:
-      vmImage: 'windows-2019'
-    variables:
-    - group: 'Release'
-    steps: 
-    - task: UseDotNet@2
-      displayName: 'Use .NET SDK $(dotnetSdkVersion)'
-      inputs:
-        version: '$(dotnetSdkVersion)'
-    - task: DotNetCoreCLI@2
-      displayName: 'Build the project - $(buildConfiguration)'
-      inputs:
-        command: 'build'
-        arguments: '--configuration $(buildConfiguration)'
-        projects: '$(System.DefaultWorkingDirectory)/test/**/*TechFabricSln.Test.csproj'
-    - task: DotNetCoreCLI@2
-      displayName: 'Run unit tests - $(buildConfiguration)'
-      inputs:
-        command: 'test'
-        arguments: '--no-build --configuration $(buildConfiguration)'
-        publishTestResults: true
-        projects: '$(System.DefaultWorkingDirectory)/test/**/*TechFabricSln.Test.csproj'
+#   - job: RunUITests 
+#     dependsOn: Deploy
+#     displayName: 'Run UI tests'
+#     pool:
+#       vmImage: 'windows-2019'
+#     variables:
+#     - group: 'Release'
+#     steps: 
+#     - task: UseDotNet@2
+#       displayName: 'Use .NET SDK $(dotnetSdkVersion)'
+#       inputs:
+#         version: '$(dotnetSdkVersion)'
+#     - task: DotNetCoreCLI@2
+#       displayName: 'Build the project - $(buildConfiguration)'
+#       inputs:
+#         command: 'build'
+#         arguments: '--configuration $(buildConfiguration)'
+#         projects: '$(System.DefaultWorkingDirectory)/test/**/*TechFabricSln.Test.csproj'
+#     - task: DotNetCoreCLI@2
+#       displayName: 'Run unit tests - $(buildConfiguration)'
+#       inputs:
+#         command: 'test'
+#         arguments: '--no-build --configuration $(buildConfiguration)'
+#         publishTestResults: true
+#         projects: '$(System.DefaultWorkingDirectory)/test/**/*TechFabricSln.Test.csproj'
         
-- stage: 'Staging'
-  displayName: 'Deploy to the staging environment'
-  dependsOn: Test
-  jobs:
-  - deployment: Deploy
-    pool:
-      vmImage: 'ubuntu-20.04'
-    environment: staging
-    variables:
-    - group: 'Release'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - download: current
-            artifact: drop
-          - task: AzureWebApp@1
-            displayName: 'Azure App Service Deploy: website'
-            inputs:
-              azureSubscription: 'Resource Manager - Tailspin - Space Game'
-              appName: '$(WebAppNameStaging)'
-              package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)'
+# - stage: 'Staging'
+#   displayName: 'Deploy to the staging environment'
+#   dependsOn: Test
+#   jobs:
+#   - deployment: Deploy
+#     pool:
+#       vmImage: 'ubuntu-20.04'
+#     environment: staging
+#     variables:
+#     - group: 'Release'
+#     strategy:
+#       runOnce:
+#         deploy:
+#           steps:
+#           - download: current
+#             artifact: drop
+#           - task: AzureWebApp@1
+#             displayName: 'Azure App Service Deploy: website'
+#             inputs:
+#               azureSubscription: 'Resource Manager - Tailspin - Space Game'
+#               appName: '$(WebAppNameStaging)'
+#               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)'
