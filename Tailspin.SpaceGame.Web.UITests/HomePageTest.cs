@@ -25,16 +25,10 @@ namespace UITests
         [OneTimeSetUp]
         public void Setup()
         {
-             try
+            try
             {
-                string path = "C:\\Users\\DiomedesFrias\\OneDrive - SmartLogix\\Desktop\\Learn\\Testing\\mslearn-tailspin-spacegame-web-deploy\\Tailspin.SpaceGame.Web.UITests\\bin\\Release\\net6.0";
-                Environment.SetEnvironmentVariable("ChromeWebDriver", path);
-                Environment.SetEnvironmentVariable("GeckoWebDriver", path);
-                Environment.SetEnvironmentVariable("EdgeWebDriver", path);
-                Environment.SetEnvironmentVariable("SITE_URL", "https://localhost:50005/");
-
                 // Create the driver for the current browser.
-                switch (browser)
+                switch(browser)
                 {
                   case "Chrome":
                     driver = new ChromeDriver(
@@ -43,11 +37,7 @@ namespace UITests
                     break;
                   case "Firefox":
                     driver = new FirefoxDriver(
-                        Environment.GetEnvironmentVariable("GeckoWebDriver"),
-                        new FirefoxOptions
-                        {
-                            AcceptInsecureCertificates = true
-                        }
+                        Environment.GetEnvironmentVariable("GeckoWebDriver")
                     );
                     break;
                   case "Edge":
@@ -64,17 +54,16 @@ namespace UITests
                 }
 
                 // Wait until the page is fully loaded on every page navigation or page reload.
-                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(90);
+                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
 
                 // Navigate to the site.
                 // The site name is stored in the SITE_URL environment variable to make 
                 // the tests more flexible.
                 string url = Environment.GetEnvironmentVariable("SITE_URL");
-                //string url = "https://localhost:50005/";
-                driver.Navigate().GoToUrl(url);
+                driver.Navigate().GoToUrl(url + "/");
 
                 // Wait for the page to be completely loaded.
-                new WebDriverWait(driver, TimeSpan.FromSeconds(60))
+                new WebDriverWait(driver, TimeSpan.FromSeconds(10))
                     .Until(d => ((IJavaScriptExecutor) d)
                         .ExecuteScript("return document.readyState")
                         .Equals("complete"));
