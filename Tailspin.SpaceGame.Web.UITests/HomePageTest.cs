@@ -25,10 +25,16 @@ namespace UITests
         [OneTimeSetUp]
         public void Setup()
         {
-            try
+             try
             {
+                string path = "C:\\Users\\DiomedesFrias\\OneDrive - SmartLogix\\Desktop\\Learn\\Testing\\mslearn-tailspin-spacegame-web-deploy\\Tailspin.SpaceGame.Web.UITests\\bin\\Release\\net6.0";
+                Environment.SetEnvironmentVariable("ChromeWebDriver", path);
+                Environment.SetEnvironmentVariable("GeckoWebDriver", path);
+                Environment.SetEnvironmentVariable("EdgeWebDriver", path);
+                Environment.SetEnvironmentVariable("SITE_URL", "https://localhost:50005/");
+
                 // Create the driver for the current browser.
-                switch(browser)
+                switch (browser)
                 {
                   case "Chrome":
                     driver = new ChromeDriver(
@@ -37,7 +43,11 @@ namespace UITests
                     break;
                   case "Firefox":
                     driver = new FirefoxDriver(
-                        Environment.GetEnvironmentVariable("GeckoWebDriver")
+                        Environment.GetEnvironmentVariable("GeckoWebDriver"),
+                        new FirefoxOptions
+                        {
+                            AcceptInsecureCertificates = true
+                        }
                     );
                     break;
                   case "Edge":
@@ -54,16 +64,17 @@ namespace UITests
                 }
 
                 // Wait until the page is fully loaded on every page navigation or page reload.
-                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
+                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(90);
 
                 // Navigate to the site.
                 // The site name is stored in the SITE_URL environment variable to make 
                 // the tests more flexible.
                 string url = Environment.GetEnvironmentVariable("SITE_URL");
-                driver.Navigate().GoToUrl(url + "/");
+                //string url = "https://localhost:50005/";
+                driver.Navigate().GoToUrl(url);
 
                 // Wait for the page to be completely loaded.
-                new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                new WebDriverWait(driver, TimeSpan.FromSeconds(60))
                     .Until(d => ((IJavaScriptExecutor) d)
                         .ExecuteScript("return document.readyState")
                         .Equals("complete"));
@@ -88,7 +99,7 @@ namespace UITests
             }
         }
 
-        //  Download game
+        // Download game
         [TestCase("download-btn", "pretend-modal")]
         // Screen image
         [TestCase("screen-01", "screen-modal")]
@@ -96,7 +107,7 @@ namespace UITests
         [TestCase("profile-1", "profile-modal-1")]
         public void ClickLinkById_ShouldDisplayModalById(string linkId, string modalId)
         {
-            // Skip the test if the driver could not be loaded .
+            // Skip the test if the driver could not be loaded.
             // This happens when the underlying browser is not installed.
             if (driver == null)
             {
