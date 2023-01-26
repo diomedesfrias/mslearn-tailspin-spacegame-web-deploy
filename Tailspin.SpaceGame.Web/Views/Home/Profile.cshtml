@@ -1,4 +1,5 @@
 ﻿@model TailSpin.SpaceGame.Web.Models.ProfileViewModel
+
 @{
     ViewData["Title"] = "@Model.Profile.UserName Profile";
 }
@@ -18,14 +19,15 @@
                     <div class="col-sm-8">
                         <div class="content">
                             <h1>@Model.Profile.UserName</h1>
-                            <b>Rank #@Model.Rank</b>
-                            <h2>Achievements</h2>
-                            <ul>
-                                @foreach (var achievement in Model.Profile.Achievements)
-                                {
-                                    <li>@achievement</li>
-                                }
-                            </ul>
+                            <h1>Monto Disponible</h1>
+                            <b id="valorOriginal">@Model.Profile.MontoDisponible</b>
+                            <p>Monto a Descontar:</p>
+                            <input type="text" id="montoDescuento-@Model.Profile.Id" />
+                            <br />
+                            <br />
+                            <a href="" id="descuentoBtnAccept" onclick="descuentoBtnAccept(@Model.Profile.Id, @Model.Profile.MontoDisponible)" class="btn btn-default btn-lg text-center" data-dismiss="modal" data-target="#login-modal">Aceptar</a>
+                            @*                            <p>Profile Id</p>
+                            <input id="hiddenProfileId + @Model.Profile.Id" type="text" value="@Model.Profile.Id" />*@
                         </div>
                     </div>
                 </div>
@@ -33,3 +35,19 @@
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+    function descuentoBtnAccept(Id, valorOriginal) {
+
+        var montoADebitar = $("#montoDescuento-" + Id).val();
+
+        var total = parseInt(valorOriginal) - parseInt(montoADebitar);
+
+        var id = "#montoId-" + Id;
+
+        $(id).text(total);
+    }
+
+</script>
