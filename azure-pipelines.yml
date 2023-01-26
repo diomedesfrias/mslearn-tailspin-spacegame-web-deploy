@@ -63,8 +63,20 @@ stages:
         arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
         zipAfterPublish: true
 
-    - publish: '$(Build.ArtifactStagingDirectory)'
-      artifact: drop
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet publish test --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)' 
+      inputs:
+        command: 'publish'
+        projects: '$(System.DefaultWorkingDirectory)/**/*UITests.csproj'
+        publishWebProjects: false
+        arguments: '-p:PublishChromeDriver=true --runtime win-x64 --output $(Build.ArtifactStagingDirectory)/**/*UITests.csproj'
+        zipAfterPublish: false
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
 
 - stage: 'Dev'
   displayName: 'Deploy to the dev environment'
