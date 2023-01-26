@@ -88,7 +88,7 @@ namespace UITests
             }
         }
 
-        // Download game
+        //  Download game
         [TestCase("download-btn", "pretend-modal")]
         // Screen image
         [TestCase("screen-01", "screen-modal")]
