@@ -29,8 +29,8 @@ namespace TechFabricSln.Test
         {
 
             driver = new ChromeDriver();
-            driver.Navigate().GoToUrl("https://localhost:61126/");
-            //driver.Navigate().GoToUrl(Environment.GetEnvironmentVariable("SITE_URL"));
+            //driver.Navigate().GoToUrl("https://localhost:49385/");
+            driver.Navigate().GoToUrl(Environment.GetEnvironmentVariable("SITE_URL"));
             Thread.Sleep(3000);
             // Locate the link by its ID and then click the link.
             ClickElement(FindElement(By.Id("login-btn")));
