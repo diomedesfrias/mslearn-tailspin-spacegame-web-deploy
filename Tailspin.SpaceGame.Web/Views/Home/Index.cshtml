@@ -6,7 +6,9 @@
 <section class="login">
     <div class="image-cap"></div>
     <div class="container">
-        <a href="" id="loginBtn" class="btn btn-default btn-lg" data-toggle="modal" data-target="#login-modal">Iniciar Sesion</a>
+        <button type="button" id="loginBtn" class="btn btn-primary">
+            Iniciar Sesion
+        </button>
     </div>
 </section>
 
@@ -43,6 +45,21 @@
 <section class="leaderboard">
     <div class="container">
         <a name="leaderboard"></a>
+
+
+        @*AUTO COMPLETE EXPERIMENT*@
+
+        <div id="project-label">Select a project (type "s" for a start):</div>
+        <input id="project">
+        <input type="hidden" id="project-id">
+        <p id="project-description"></p>
+        @*END AUTO COMPLETE EXPERIMENT*@
+
+
+
+
+
+
         <h2>Proveedores Medicos</h2>
         <!-- Start Leaderboard table -->
         <div class="row">
@@ -155,94 +172,86 @@
         <div class="modal-content">
             <div class="modal-header no-border">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h2>Sign in with your MCS Card:</h2>
             </div>
             <div class="modal-body text-center">
-                <p>User</p>
-                <input type="text" id="userName" />
+                <p>MCS Card ID</p>
+                <input type="text" id="userName" placeholder="MCS Card ID:" />
                 <br />
-                <p>Password</p>
-                <input type="password" id="password" />
+                <p id="emailSendPLabel" style="color:red">A email was send to your email account.</p>
             </div>
             <div class="container">
-                <a href="" id="login-btn-accept" class="btn btn-default btn-lg" data-dismiss="modal" data-target="#login-modal">Iniciar Sesion</a>
+                <button type="button" id="login-btn-accept" data-loading-text="Loading..." class="btn btn-primary">
+                    Sign In
+                </button>
+                <button type="button" id="okButton" data-loading-text="Loading..." class="btn btn-primary">
+                    Ok
+                </button>
             </div>
             <div class="container">
                 <a href="" id="cancel-login-btn" class="btn btn-default btn-lg" data-dismiss="modal" data-target="#login-modal">Cancelar</a>
+            </div>
+            <div id="dontHaveAccountLabel" class="container">
+                <p>Don't have a account?</p>
+                <a href="" id="signUpBtn" class="btn btn-default btn-lg" data-dismiss="modal" data-target="#login-modal">Sign up now</a>
             </div>
             <br />
         </div>
     </div>
 </div>
 
-<!-- Modals -->
-<div class="modal fade" id="test-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+@*    <div class="container">
+        <a href="" id="loginBtn" class="btn btn-default btn-lg" data-toggle="modal" data-target="#login-modal">Iniciar Sesion</a>
+    </div>
+*@
+
+<div class="modal fade" id="codeModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header no-border">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Sign-In</h4>
             </div>
             <div class="modal-body">
-                modal
+                <div class="modal-body text-center">
+                    <p>Email Verification Code:</p>
+                    <input type="text" id="txtCode" placeholder="code Number:" />
+                </div>
+                <div class="container">
+                    <button type="button" id="continueCodeBtn" data-loading-text="Loading..." class="btn btn-primary">
+                        continue
+                    </button>
+                </div>
             </div>
-        </div>
-    </div>
-</div>
+            <div class="modal-footer">
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
-<!-- Pic modals -->
-<div class="modal fade pic-01" id="screen-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="welcomeModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header no-border">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Hello</h4>
             </div>
-            <div class="modal-body text-center">
-                <img src="/images/space-game-placeholder.svg" width="100%" alt="">
-                <p>Catalogo example</p>
+            <div class="modal-body">
+                <div class="modal-body text-center">
+                    <h1 style="color:green">You are Welcome</h1>
+                </div>
+                <div class="container">
+                    <button type="button" id="welcomeAcceptBtn" data-loading-text="Loading..." class="btn btn-primary">
+                        Accept
+                    </button>
+                </div>
             </div>
-        </div>
-    </div>
-</div>
-
-<!-- Social -->
-<div class="modal fade social-media" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header no-border">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <div class="modal-footer">
             </div>
-            <div class="modal-body text-center">
-                Social media example
-            </div>
-        </div>
-    </div>
-</div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+@*
 
-<!-- Dead end modal -->
-<div class="modal fade" id="pretend-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header no-border">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body text-center">
-                This link is for example purposes and goes nowhere. 😐
-            </div>
-        </div>
-    </div>
-</div>
-
-<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#logInfoContainer").hide();
-    });
-
-
-    $("#login-btn-accept").click(function () {
-        var userName = $("#userName").val();
-        $("#userNameLabel").text(userName);
-        $("#logInfoContainer").show();
-    });
-
-</script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>*@
