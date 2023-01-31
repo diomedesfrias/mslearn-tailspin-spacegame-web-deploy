@@ -49,8 +49,26 @@
 
         @*AUTO COMPLETE EXPERIMENT*@
 
-        <div id="project-label">Select a project (type "s" for a start):</div>
-        <input id="project">
+
+
+        @*DROP DOWN*@
+        <div class="dropdown">
+            <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Tipo de Busqueda
+                <span class="caret"></span>
+            </button>
+            <ul id="tableMenu" class="dropdown-menu" aria-labelledby="dLabel">
+                <li><p>Name</p></li>
+                <li><p>Category</p></li>
+                <li><p>City</p></li>
+            </ul>
+        </div>
+
+
+        @*END DROP DOWN*@
+
+        <div id="project-label">Type by Category:</div>
+        <input id="project" onkeyup="fillTable()">
         <input type="hidden" id="project-id">
         <p id="project-description"></p>
         @*END AUTO COMPLETE EXPERIMENT*@
@@ -64,36 +82,6 @@
 
         <div id="tableDiv"></div>
 
-@*        <table id="myTable" class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-
-                </tr>
-            </tbody>
-        </table>*@
 
         <h2>Proveedores Medicos</h2>
         <!-- Start Leaderboard table -->

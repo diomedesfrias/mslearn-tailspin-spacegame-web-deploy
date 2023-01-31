@@ -3,79 +3,100 @@
 
 // Write your JavaScript code.
 
+var tipoDeBusqueda = "";
+var projects = [
+    { id: 1, value: "Thomas", category: "Afiliado", city: "San Juan" },
+    { id: 65, value: "Richard", category: "Suplidor", city: "Agudillas" },
+    { id: 235, value: "Harold", category: "Afiliado", city: "San Juan" },
+    { id: 78, value: "Santa Maria", category: "Suplidor", city: "San Juan" },
+    { id: 75, value: "Gunner", category: "Afiliado", city: "San Juan" },
+    { id: 124, value: "Shad", category: "Suplidor", city: "San Juan" },
+    { id: 1233, value: "Aziz", category: "Medico", city: "Toa Alta" },
 
-$(function () {
-    //overriding jquery-ui.autocomplete .js functions
-    $.ui.autocomplete.prototype._renderMenu = function (ul, items) {
+    { id: 244, value: "Olvin", category: "Suplidor", city: "San Juan" },
+    { id: 1, value: "Carlos", category: "Afiliado", city: "Toa Alta" },
+    { id: 65, value: "Juan Jose", category: "Afiliado", city: "Agudillas" },
+    { id: 235, value: "Harold", category: "Afiliado", city: "Toa Alta" },
+    { id: 78, value: "Santa Maria", category: "Medico", city: "San Juan" },
+    { id: 75, value: "Rafael", category: "Afiliado", city: "Agudillas" },
+    { id: 124, value: "Yancarlos", category: "Medico", city: "Agudillas" },
+    { id: 1233, value: "Maria", category: "Medico", city: "Toa Alta" },
+    { id: 244, value: "Jonas", category: "Medico", city: "Toa Alta" }
+];
 
-        var self = this;
-        //table definitions
-        var tableDiv = $("#tableDiv");
-        tableDiv.empty();
-        tableDiv.append("<table class=" + '"' + 'table' + '"' + "><thead><tr><th>ID#</th><th>Name</th><th>category</th><th>city</th></tr></thead><tbody></tbody></table>");
-        
-        $.each(items, function (index, item) {
-            self._renderItemData(ul, tableDiv.find("table tbody"), item);
-        });
-    };
-    $.ui.autocomplete.prototype._renderItemData = function (ul, table, item) {
-         
-        return this._renderItem(table, item).data("ui-autocomplete-item", item);
-    };
-    $.ui.autocomplete.prototype._renderItem = function (table, item) {
-        return $("<tr class='ui-menu-item' role='presentation'></tr>")
-            //.data( "item.autocomplete", item )
-            .append("<td >" + item.id + "</td>" + "<td>" + item.value + "</td>" + "<td>" + item.category + "</td>" + "<td>" + item.city + "</td>")
-            .appendTo(table);
-    };
-
-    $.getJSON("js/profiles.json", function (json) {
-
-
-        var projects = [
-            { id: 1, value: "Thomas", category: "Afiliado", city: "San Juan" },
-            { id: 65, value: "Richard", category: "Suplidor", city: "Agudillas" },
-            { id: 235, value: "Harold", category: "Afiliado", city: "San Juan" },
-            { id: 78, value: "Santa Maria", category: "Suplidor", city: "San Juan" },
-            { id: 75, value: "Gunner", category: "Afiliado", city: "San Juan" },
-            { id: 124, value: "Shad", category: "Suplidor", city: "San Juan" },
-            { id: 1233, value: "Aziz", category: "Medico", city: "Toa Alta" },
-
-            { id: 244, value: "Olvin", category: "Suplidor", city: "San Juan" },
-            { id: 1, value: "Carlos", category: "Afiliado", city: "Toa Alta" },
-            { id: 65, value: "Juan Jose", category: "Afiliado", city: "Agudillas" },
-            { id: 235, value: "Harold", category: "Afiliado", city: "Toa Alta" },
-            { id: 78, value: "Santa Maria", category: "Medico", city: "San Juan" },
-            { id: 75, value: "Rafael", category: "Afiliado", city: "Agudillas" },
-            { id: 124, value: "Yancarlos", category: "Medico", city: "Agudillas" },
-            { id: 1233, value: "Maria", category: "Medico", city: "Toa Alta" },
-            { id: 244, value: "Jonas", category: "Medico", city: "Toa Alta" }
-        ];
-        console.log(json);
-        console.log(projects);
-
-        $("#project").autocomplete({
-            minLength: 1,
-            source: projects,
-
-            focus: function (event, ui) {
-                console.log(ui.item.id);
-                $("#project").val(ui.item.value);
-                $("#project-id").val(ui.item.id);
-                // $("#project-description").html(ui.item.category);
-                return false;
-            }//you can write for select too
-            /*select:*/
-        })
-
-    });
+$("#tableMenu p").on('click', function (e) {
+    // e.preventDefault(); // cancel the link behaviour
+    tipoDeBusqueda = $(this).text();
+    console.log(tipoDeBusqueda);
+    $("#dLabel").text(tipoDeBusqueda);
 
 
 });
 
-$(document).ready(function () {
-    loginUserFlow();
 
+
+function fillTable() {
+    console.log("Hola");
+
+    //table definitions
+    var tableDiv = $("#tableDiv");
+    tableDiv.empty();
+    tableDiv.append("<table class=" + '"' + 'table' + '"' + "><thead><tr><th>ID#</th><th>Name</th><th>category</th><th>city</th></tr></thead><tbody></tbody></table>");
+
+
+    var searchText = $("#project").val();
+    var searchType = tipoDeBusqueda;
+
+    if (searchText === null) {
+        AddElementsToList(projects, tableDiv);
+    }
+
+    else {
+        let projects2 = [];
+
+        switch (searchType) {
+            case 'Name':
+                projects2 = projects.filter(el => el.value.toLowerCase().includes(searchText.toLowerCase()));
+                break;
+            case 'Category':
+                projects2 = projects.filter(el => el.category.toLowerCase().includes(searchText.toLowerCase()));
+                break
+            case 'City':
+                projects2 = projects.filter(el => el.city.toLowerCase().includes(searchText.toLowerCase()));
+                break;
+            default:
+        }
+
+        AddElementsToList(projects2, tableDiv);
+    }
+}
+
+function AddElementsToList(projects2, tableDiv) {
+
+    if (projects2.length != 0) {
+        for (var i = 0; i < projects2.length; i++) {
+            console.log("resultado");
+            addRow(tableDiv.find("table tbody"), projects2[i]);
+        }
+    }
+
+
+}
+
+function addRow(table, item) {
+    $("<tr class='ui-menu-item' role='presentation'></tr>")
+        .append("<td >" + item.id + "</td>" + "<td>" + item.value + "</td>" + "<td>" + item.category + "</td>" + "<td>" + item.city + "</td>")
+        .appendTo(table);
+}
+
+
+
+
+
+$(document).ready(function () {
+    $("#tableMenu li p")[0].click();
+    loginUserFlow();
+    fillTable();
 
 
 });
