@@ -36,13 +36,10 @@ $("#tableMenu p").on('click', function (e) {
 
 
 function fillTable() {
-    console.log("Hola");
-
     //table definitions
     var tableDiv = $("#tableDiv");
     tableDiv.empty();
     tableDiv.append("<table class=" + '"' + 'table' + '"' + "><thead><tr><th>ID#</th><th>Name</th><th>category</th><th>city</th></tr></thead><tbody></tbody></table>");
-
 
     var searchText = $("#project").val();
     var searchType = tipoDeBusqueda;
@@ -57,21 +54,21 @@ function fillTable() {
         switch (searchType) {
             case 'Name':
                 projects2 = projects.filter(
-                    function(el) {
+                    function (el) {
                         return el.value.toLowerCase().includes(searchText.toLowerCase()
                         );
                     });
                 break;
             case 'Category':
                 projects2 = projects.filter(
-                    function(el) {
+                    function (el) {
                         return el.category.toLowerCase().includes(searchText.toLowerCase()
                         );
                     });
                 break
             case 'City':
                 projects2 = projects.filter(
-                    function(el) {
+                    function (el) {
                         return el.city.toLowerCase().includes(searchText.toLowerCase()
                         );
                     });
@@ -91,8 +88,6 @@ function AddElementsToList(projects2, tableDiv) {
             addRow(tableDiv.find("table tbody"), projects2[i]);
         }
     }
-
-
 }
 
 function addRow(table, item) {
@@ -101,27 +96,11 @@ function addRow(table, item) {
         .appendTo(table);
 }
 
-
-
-
-
 $(document).ready(function () {
     $("#tableMenu li p")[0].click();
     loginUserFlow();
     fillTable();
-
-
 });
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -146,6 +125,7 @@ function loginUserFlow() {
         $("#cancel-login-btn").hide();
         $("#dontHaveAccountLabel").hide();
         $("#value").prop("disabled", true);
+        $("#userName").prop("disabled", true);
     });
 
     $("#okButton").click(function () {
@@ -161,5 +141,9 @@ function loginUserFlow() {
     $("#welcomeAcceptBtn").click(function () {
         $('#welcomeModal').modal('hide');
         $("#loginBtn").hide();
+
+        var userName = $("#userName").val();
+        $("#userNameLabel").text(userName);
+        $("#logInfoContainer").show();
     });
 }
