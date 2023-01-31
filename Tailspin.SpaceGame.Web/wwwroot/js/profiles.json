@@ -1,7 +1,7 @@
 [
   {
     "id": "1",
-    "value": "Juan Jose",
+    "userName": "Juan Jose",
     "avatarUrl": "images\/avatars\/default.svg",
     "montoDisponible": 10000,
     "achievements": [
@@ -18,7 +18,7 @@
   },
   {
     "id": "2",
-    "value": "Marcos Aurelio",
+    "userName": "Marcos Aurelio",
     "avatarUrl": "images\/avatars\/default.svg",
     "montoDisponible": 10000,
     "achievements": [
@@ -35,7 +35,7 @@
   },
   {
     "id": "3",
-    "value": "Pedro Castro",
+    "userName": "Pedro Castro",
     "avatarUrl": "images\/avatars\/default.svg",
     "montoDisponible": 10000,
     "achievements": [
@@ -49,7 +49,7 @@
   },
   {
     "id": "4",
-    "value": "Elvis Daniel",
+    "userName": "Elvis Daniel",
     "avatarUrl": "images\/avatars\/default.svg",
     "montoDisponible": 10000,
     "achievements": [
@@ -66,7 +66,7 @@
   },
   {
     "id": "5",
-    "value": "Lirios Mena",
+    "userName": "Lirios Mena",
     "avatarUrl": "images\/avatars\/default.svg",
     "achievements": [
       "Atom Smasher"
@@ -74,7 +74,7 @@
   },
   {
     "id": "6",
-    "value": "Gonzalo Castillo",
+    "userName": "Gonzalo Castillo",
     "avatarUrl": "images\/avatars\/default.svg",
     "montoDisponible": 10000,
     "achievements": [
@@ -88,7 +88,7 @@
   },
   {
     "id": "7",
-    "value": "Hipolito Mejia",
+    "userName": "Hipolito Mejia",
     "avatarUrl": "images\/avatars\/default.svg",
     "montoDisponible": 10000,
     "achievements": [
@@ -102,7 +102,7 @@
   },
   {
     "id": "8",
-    "value": "Pedro",
+    "userName": "Pedro",
     "avatarUrl": "images\/avatars\/default.svg",
     "montoDisponible": 10000,
     "achievements": [
@@ -118,7 +118,7 @@
   },
   {
     "id": "9",
-    "value": "Abinader",
+    "userName": "Abinader",
     "avatarUrl": "images\/avatars\/default.svg",
     "montoDisponible": 10000,
     "achievements": [
@@ -132,7 +132,7 @@
   },
   {
     "id": "10",
-    "value": "Rosario",
+    "userName": "Rosario",
     "avatarUrl": "images\/avatars\/default.svg",
     "montoDisponible": 10000,
     "achievements": [
@@ -149,7 +149,7 @@
   },
   {
     "id": "11",
-    "value": "Leonel",
+    "userName": "Leonel",
     "avatarUrl": "images\/avatars\/default.svg",
     "montoDisponible": 10000,
     "achievements": [
@@ -166,7 +166,7 @@
   },
   {
     "id": "12",
-    "value": "Diomedes",
+    "userName": "Diomedes",
     "avatarUrl": "images\/avatars\/default.svg",
     "montoDisponible": 10000,
     "achievements": [
@@ -179,7 +179,7 @@
   },
   {
     "id": "13",
-    "value": "Olvin",
+    "userName": "Olvin",
     "avatarUrl": "images\/avatars\/default.svg",
     "montoDisponible": 10000,
     "achievements": [
@@ -190,7 +190,7 @@
   },
   {
     "id": "14",
-    "value": "Rafael Estevez",
+    "userName": "Rafael Estevez",
     "avatarUrl": "images\/avatars\/default.svg",
     "montoDisponible": 10000,
     "achievements": [
@@ -206,7 +206,7 @@
   },
   {
     "id": "15",
-    "value": "Yovanny Castro",
+    "userName": "Yovanny Castro",
     "avatarUrl": "images\/avatars\/default.svg",
     "montoDisponible": 10000,
     "achievements": [
@@ -222,7 +222,7 @@
   },
   {
     "id": "16",
-    "value": "Yancarlos Polanco",
+    "userName": "Yancarlos Polanco",
     "avatarUrl": "images\/avatars\/default.svg",
     "montoDisponible": 10000,
     "achievements": [
@@ -231,7 +231,7 @@
   },
   {
     "id": "17",
-    "value": "Xavier Lau",
+    "userName": "Xavier Lau",
     "avatarUrl": "images\/avatars\/default.svg",
     "montoDisponible": 10000,
     "achievements": [
@@ -246,7 +246,7 @@
   },
   {
     "id": "18",
-    "value": "Olga Laureano",
+    "userName": "Olga Laureano",
     "avatarUrl": "images\/avatars\/default.svg",
     "montoDisponible": 10000,
     "achievements": [
@@ -264,7 +264,7 @@
   },
   {
     "id": "19",
-    "value": "Estefany",
+    "userName": "Estefany",
     "avatarUrl": "images\/avatars\/default.svg",
     "montoDisponible": 10000,
     "achievements": [
@@ -277,7 +277,7 @@
   },
   {
     "id": "20",
-    "value": "Dameiby Peralta",
+    "userName": "Dameiby Peralta",
     "avatarUrl": "images\/avatars\/default.svg",
     "montoDisponible": 10000,
     "achievements": [
