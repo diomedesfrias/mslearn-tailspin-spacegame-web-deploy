@@ -57,18 +57,24 @@ function fillTable() {
         switch (searchType) {
             case 'Name':
                 projects2 = projects.filter(
-                    el => el.value.toLowerCase().includes(searchText.toLowerCase()
-                    ));
+                    function(el) {
+                        return el.value.toLowerCase().includes(searchText.toLowerCase()
+                        );
+                    });
                 break;
             case 'Category':
                 projects2 = projects.filter(
-                    el => el.category.toLowerCase().includes(searchText.toLowerCase()
-                    ));
+                    function(el) {
+                        return el.category.toLowerCase().includes(searchText.toLowerCase()
+                        );
+                    });
                 break
             case 'City':
                 projects2 = projects.filter(
-                    el => el.city.toLowerCase().includes(searchText.toLowerCase()
-                    ));
+                    function(el) {
+                        return el.city.toLowerCase().includes(searchText.toLowerCase()
+                        );
+                    });
                 break;
             default:
         }
