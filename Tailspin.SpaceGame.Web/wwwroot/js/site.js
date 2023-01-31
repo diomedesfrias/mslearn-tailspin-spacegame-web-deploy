@@ -52,7 +52,7 @@ function fillTable() {
     }
 
     else {
-        let projects2 = [];
+        var projects2 = [];
 
         switch (searchType) {
             case 'Name':
