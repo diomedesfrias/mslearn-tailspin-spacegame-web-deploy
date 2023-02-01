@@ -4,11 +4,16 @@
 }
 
 <section class="login">
-    <div class="image-cap"></div>
+
     <div class="container">
-        <button type="button" id="loginBtn" class="btn btn-primary">
-            Iniciar Sesion
-        </button>
+        <div class="row">
+            <div class="col-md-5 text-left">
+                <button type="button" id="loginBtn" class="btn btn-primary">
+                    Iniciar Sesion
+                </button>
+            </div>
+            <div class="col-md-5"></div>
+        </div>
     </div>
 </section>
 
@@ -30,7 +35,7 @@
 </section>
 
 <!-- Screenshots -->
-<section class="screens">
+@*<section class="screens">
     <div class="container">
         <ul>
             <li><a href="" id="screen-01" data-toggle="modal" data-target=".pic-01"><img src="/images/space-game-placeholder.svg" alt=""></a></li>
@@ -40,149 +45,146 @@
         </ul>
     </div>
 </section>
-
+*@
 <!-- Leaderboard -->
 <section class="leaderboard">
     <div class="container">
         <a name="leaderboard"></a>
 
+        <h2>Contactos:</h2>
 
-        @*AUTO COMPLETE EXPERIMENT*@
+        <div class="row">
+            <div class="col-md-5">
+                <div id="project-label">Select Category:</div>
+                @*DROP DOWN*@
+                <div class="dropdown">
+                    <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Tipo de Busqueda
+                        <span class="caret"></span>
+                    </button>
+                    <ul id="tableMenu" class="dropdown-menu" aria-labelledby="dLabel">
+                        <li id="liDropName"><p>Name</p></li>
+                        <li id="liDropCategory"><p>Category</p></li>
+                        <li id="liDropCity"><p>City</p></li>
+                    </ul>
+                </div>
 
 
-
-        @*DROP DOWN*@
-        <div class="dropdown">
-            <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Tipo de Busqueda
-                <span class="caret"></span>
-            </button>
-            <ul id="tableMenu" class="dropdown-menu" aria-labelledby="dLabel">
-                <li id="liDropName"><p>Name</p></li>
-                <li id="liDropCategory"><p>Category</p></li>
-                <li id="liDropCity"><p>City</p></li>
-            </ul>
+                @*END DROP DOWN*@
+            </div>
+            <div class="col-md-5">
+                <div id="project-label">Type by Category:</div>
+                <input id="project" onkeyup="fillTable()">
+                <input type="hidden" id="project-id">
+                <p id="project-description"></p>
+            </div>
         </div>
 
-
-        @*END DROP DOWN*@
-
-        <div id="project-label">Type by Category:</div>
-        <input id="project" onkeyup="fillTable()">
-        <input type="hidden" id="project-id">
-        <p id="project-description"></p>
-        @*END AUTO COMPLETE EXPERIMENT*@
-
-
-        <br />        
-        <br />        
-        <br />        
-        <br />
         <br />
 
         <div id="tableDiv"></div>
 
 
-        <h2>Proveedores Medicos</h2>
+
         <!-- Start Leaderboard table -->
-        <div class="row">
-            <div class="col-sm-9 leader-scores">
-                <div class="row high-score hidden-xs">
+        @* <div class="row">
+        <div class="col-sm-9 leader-scores">
+        <div class="row high-score hidden-xs">
 
-                    <div class="col-sm-4">
-                        Paciente
-                    </div>
-
-                    <div class="col-sm-4">
-                        Monto Cobertura Disponible
-                    </div>
-
-                    <div class="col-sm-4">
-                        Opcion
-                    </div>
-                </div>
-
-                @{
-                    if (Model.Scores.Count() == 0)
-                    {
-                        <div class="row" style="margin-left: 5px; margin-top: 20px;">No scores match your selection.</div>
-                    }
-
-                    int rank = ((Model.Page - 1) * Model.PageSize) + 1;
-                    foreach (var score in Model.Scores)
-                    {
-                        <div class="row high-score align-items-center">
-                            <div class="col-sm-1 score-data" style="visibility:hidden">
-                                @(rank++).
-                            </div>
-                            <div class="col-sm-4 score-data">
-                                <div style="text-align: left; margin-left: 100px;">
-                                    <partial name="Profile" model="new ProfileViewModel { Profile = score.Profile, Rank = (rank - 1).ToString() }" />
-                                    <a href="" data-toggle="modal" data-target="#profile-modal-@((rank - 1).ToString())">
-                                        <img class="avatar" src="@score.Profile.AvatarUrl" alt="@score.Profile.UserName">
-                                        <div class="score-data username" id="profile-@((rank - 1).ToString())">
-                                            @score.Profile.UserName
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-4 score-data">
-                                <p id="montoId-@score.Profile.Id">@score.Profile.MontoDisponible</p>
-                            </div>
-
-                            <div class="col-sm-4 score-data">
-                                <div style="text-align: left; margin-left: 100px;">
-                                    <partial name="Profile" model="new ProfileViewModel { Profile = score.Profile, Rank = (rank - 1).ToString() }" />
-                                    <a href="" data-toggle="modal" data-target="#profile-modal-@((rank - 1).ToString())">
-                                        <p class="score-data username">
-                                            Descuento
-                                        </p>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                }
-                <nav aria-label="...">
-                    <ul class="pagination">
-                        @if (string.IsNullOrEmpty(Model.PrevLink))
-                        {
-                            <li class="disabled"><span aria-hidden="true">&laquo;</span></li>
-                        }
-                        else
-                        {
-                            <li class=""><a href="@Model.PrevLink" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-                        }
-                        @{
-                            var totalPages = Model.TotalResults / Model.PageSize;
-                            if (Model.TotalResults % Model.PageSize != 0)
-                            {
-                                totalPages++;
-                            }
-
-                            for (int i = 1; i <= totalPages; i++)
-                            {
-                                <li class="@(i == Model.Page ? "active" : null)">
-                                    <a href="@($"/?page={i}&pageSize={@Model.PageSize}&mode={@Model.SelectedMode}&region={@Model.SelectedRegion}")#leaderboard">
-                                        @i
-                                        <span class="sr-only">(current)</span>
-                                    </a>
-                                </li>
-                            }
-                        }
-                        @if (string.IsNullOrEmpty(Model.NextLink))
-                        {
-                            <li class="disabled"><span aria-hidden="true">&raquo;</span></li>
-                        }
-                        else
-                        {
-                            <li class=""><a href="@Model.NextLink" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
-                        }
-                    </ul>
-                </nav>
-            </div>
+        <div class="col-sm-4">
+        Paciente
         </div>
+
+        <div class="col-sm-4">
+        Monto Cobertura Disponible
+        </div>
+
+        <div class="col-sm-4">
+        Opcion
+        </div>
+        </div>
+
+        @{
+        if (Model.Scores.Count() == 0)
+        {
+        <div class="row" style="margin-left: 5px; margin-top: 20px;">No scores match your selection.</div>
+        }
+
+        int rank = ((Model.Page - 1) * Model.PageSize) + 1;
+        foreach (var score in Model.Scores)
+        {
+        <div class="row high-score align-items-center">
+        <div class="col-sm-1 score-data" style="visibility:hidden">
+        @(rank++).
+        </div>
+        <div class="col-sm-4 score-data">
+        <div style="text-align: left; margin-left: 100px;">
+        <partial name="Profile" model="new ProfileViewModel { Profile = score.Profile, Rank = (rank - 1).ToString() }" />
+        <a href="" data-toggle="modal" data-target="#profile-modal-@((rank - 1).ToString())">
+        <img class="avatar" src="@score.Profile.AvatarUrl" alt="@score.Profile.UserName">
+        <div class="score-data username" id="profile-@((rank - 1).ToString())">
+        @score.Profile.UserName
+        </div>
+        </a>
+        </div>
+        </div>
+
+        <div class="col-sm-4 score-data">
+        <p id="montoId-@score.Profile.Id">@score.Profile.MontoDisponible</p>
+        </div>
+
+        <div class="col-sm-4 score-data">
+        <div style="text-align: left; margin-left: 100px;">
+        <partial name="Profile" model="new ProfileViewModel { Profile = score.Profile, Rank = (rank - 1).ToString() }" />
+        <a href="" data-toggle="modal" data-target="#profile-modal-@((rank - 1).ToString())">
+        <p class="score-data username">
+        Descuento
+        </p>
+        </a>
+        </div>
+        </div>
+        </div>
+        }
+        }
+        <nav aria-label="...">
+        <ul class="pagination">
+        @if (string.IsNullOrEmpty(Model.PrevLink))
+        {
+        <li class="disabled"><span aria-hidden="true">&laquo;</span></li>
+        }
+        else
+        {
+        <li class=""><a href="@Model.PrevLink" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+        }
+        @{
+        var totalPages = Model.TotalResults / Model.PageSize;
+        if (Model.TotalResults % Model.PageSize != 0)
+        {
+        totalPages++;
+        }
+
+        for (int i = 1; i <= totalPages; i++)
+        {
+        <li class="@(i == Model.Page ? "active" : null)">
+        <a href="@($"/?page={i}&pageSize={@Model.PageSize}&mode={@Model.SelectedMode}&region={@Model.SelectedRegion}")#leaderboard">
+        @i
+        <span class="sr-only">(current)</span>
+        </a>
+        </li>
+        }
+        }
+        @if (string.IsNullOrEmpty(Model.NextLink))
+        {
+        <li class="disabled"><span aria-hidden="true">&raquo;</span></li>
+        }
+        else
+        {
+        <li class=""><a href="@Model.NextLink" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+        }
+        </ul>
+        </nav>
+        </div>
+        </div>*@
     </div>
     <!-- End Leaderboard -->
 
@@ -190,35 +192,43 @@
 
 
 <!-- Log In modal -->
-<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
+<div class="modal fade bs-example-modal-sm" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header no-border">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h2>Sign in with your MCS Card:</h2>
+                <h4>Sign in with your MCS Card:</h4>
             </div>
-            <div class="modal-body text-center">
-                <p>MCS Card ID</p>
+
+            <div class="modal-body text-left">
+                <p>MCS Card ID:</p>
                 <input type="text" id="userName" placeholder="MCS Card ID:" />
-                <br />
                 <p id="emailSendPLabel" style="color:red">A email was send to your email account.</p>
             </div>
+
             <div class="container">
-                <button type="button" id="login-btn-accept" data-loading-text="Loading..." class="btn btn-primary">
-                    Sign In
-                </button>
-                <button type="button" id="okButton" data-loading-text="Loading..." class="btn btn-primary">
-                    Ok
-                </button>
+
+                <div class="row">
+                    <div class="col-sm-1">
+                        <button type="button" id="login-btn-accept" data-loading-text="Loading..." class="btn btn-primary">
+                            Sign In
+                        </button>
+                    </div>
+                    <div class="col-sm-1">
+                        <a href="" id="cancel-login-btn" class="btn btn-default" data-dismiss="modal" data-target="#login-modal">Cancelar</a>
+                        <button type="button" id="okButton" data-loading-text="Loading..." class="btn btn-primary">
+                            Ok
+                        </button>
+                    </div>
+                </div>
+
+                <br />
+                <div id="dontHaveAccountLabel">
+                    <p>Don't have a account?</p>
+                    <a href="" id="signUpBtn" class="btn btn-default" data-dismiss="modal" data-target="#login-modal">Sign up now</a>
+                </div>
+                <br />
             </div>
-            <div class="container">
-                <a href="" id="cancel-login-btn" class="btn btn-default btn-lg" data-dismiss="modal" data-target="#login-modal">Cancelar</a>
-            </div>
-            <div id="dontHaveAccountLabel" class="container">
-                <p>Don't have a account?</p>
-                <a href="" id="signUpBtn" class="btn btn-default btn-lg" data-dismiss="modal" data-target="#login-modal">Sign up now</a>
-            </div>
-            <br />
         </div>
     </div>
 </div>

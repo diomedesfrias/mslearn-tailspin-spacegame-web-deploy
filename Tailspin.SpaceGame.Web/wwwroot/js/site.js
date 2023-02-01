@@ -30,7 +30,6 @@ $("#tableMenu p").on('click', function (e) {
     console.log(tipoDeBusqueda);
     $("#dLabel").text(tipoDeBusqueda);
 
-
 });
 
 
@@ -39,7 +38,7 @@ function fillTable() {
     //table definitions
     var tableDiv = $("#tableDiv");
     tableDiv.empty();
-    tableDiv.append("<table class=" + '"' + 'table' + '"' + "><thead><tr><th>ID#</th><th>Name</th><th>category</th><th>city</th></tr></thead><tbody></tbody></table>");
+    tableDiv.append("<table class=" + '"' + 'table table-striped table-bordered' + '"' + "><thead><tr><th>ID#</th><th>Name</th><th>Category</th><th>city</th></tr></thead><tbody></tbody></table>");
 
     var searchText = $("#project").val();
     var searchType = tipoDeBusqueda;
@@ -48,9 +47,13 @@ function fillTable() {
         AddElementsToList(projects, tableDiv);
     }
 
+    if (searchType === null) {
+        AddElementsToList(projects, tableDiv);
+    }
+
     else {
         var projects2 = [];
-
+         
         switch (searchType) {
             case 'Name':
                 projects2 = projects.filter(
@@ -74,6 +77,12 @@ function fillTable() {
                     });
                 break;
             default:
+                projects2 = projects.filter(
+                    function (el) {
+                        return el.city.toLowerCase().includes(searchText.toLowerCase()
+                        );
+                    });
+                break;
         }
 
         AddElementsToList(projects2, tableDiv);
@@ -97,13 +106,10 @@ function addRow(table, item) {
 }
 
 $(document).ready(function () {
-    $("#tableMenu li p")[0].click();
+    // $("#tableMenu li p")[0].click();
     loginUserFlow();
     fillTable();
 });
-
-
-
 
 
 function loginUserFlow() {
