@@ -84,114 +84,73 @@
 
         <div id="tableDiv"></div>
 
-
-
-        <!-- Start Leaderboard table -->
-        @* <div class="row">
-        <div class="col-sm-9 leader-scores">
-        <div class="row high-score hidden-xs">
-
-        <div class="col-sm-4">
-        Paciente
-        </div>
-
-        <div class="col-sm-4">
-        Monto Cobertura Disponible
-        </div>
-
-        <div class="col-sm-4">
-        Opcion
-        </div>
-        </div>
-
-        @{
-        if (Model.Scores.Count() == 0)
-        {
-        <div class="row" style="margin-left: 5px; margin-top: 20px;">No scores match your selection.</div>
-        }
-
-        int rank = ((Model.Page - 1) * Model.PageSize) + 1;
-        foreach (var score in Model.Scores)
-        {
-        <div class="row high-score align-items-center">
-        <div class="col-sm-1 score-data" style="visibility:hidden">
-        @(rank++).
-        </div>
-        <div class="col-sm-4 score-data">
-        <div style="text-align: left; margin-left: 100px;">
-        <partial name="Profile" model="new ProfileViewModel { Profile = score.Profile, Rank = (rank - 1).ToString() }" />
-        <a href="" data-toggle="modal" data-target="#profile-modal-@((rank - 1).ToString())">
-        <img class="avatar" src="@score.Profile.AvatarUrl" alt="@score.Profile.UserName">
-        <div class="score-data username" id="profile-@((rank - 1).ToString())">
-        @score.Profile.UserName
-        </div>
-        </a>
-        </div>
-        </div>
-
-        <div class="col-sm-4 score-data">
-        <p id="montoId-@score.Profile.Id">@score.Profile.MontoDisponible</p>
-        </div>
-
-        <div class="col-sm-4 score-data">
-        <div style="text-align: left; margin-left: 100px;">
-        <partial name="Profile" model="new ProfileViewModel { Profile = score.Profile, Rank = (rank - 1).ToString() }" />
-        <a href="" data-toggle="modal" data-target="#profile-modal-@((rank - 1).ToString())">
-        <p class="score-data username">
-        Descuento
-        </p>
-        </a>
-        </div>
-        </div>
-        </div>
-        }
-        }
-        <nav aria-label="...">
-        <ul class="pagination">
-        @if (string.IsNullOrEmpty(Model.PrevLink))
-        {
-        <li class="disabled"><span aria-hidden="true">&laquo;</span></li>
-        }
-        else
-        {
-        <li class=""><a href="@Model.PrevLink" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-        }
-        @{
-        var totalPages = Model.TotalResults / Model.PageSize;
-        if (Model.TotalResults % Model.PageSize != 0)
-        {
-        totalPages++;
-        }
-
-        for (int i = 1; i <= totalPages; i++)
-        {
-        <li class="@(i == Model.Page ? "active" : null)">
-        <a href="@($"/?page={i}&pageSize={@Model.PageSize}&mode={@Model.SelectedMode}&region={@Model.SelectedRegion}")#leaderboard">
-        @i
-        <span class="sr-only">(current)</span>
-        </a>
-        </li>
-        }
-        }
-        @if (string.IsNullOrEmpty(Model.NextLink))
-        {
-        <li class="disabled"><span aria-hidden="true">&raquo;</span></li>
-        }
-        else
-        {
-        <li class=""><a href="@Model.NextLink" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
-        }
-        </ul>
-        </nav>
-        </div>
-        </div>*@
     </div>
     <!-- End Leaderboard -->
 
 </section>
 
 
-<!-- Log In modal -->
+<!-- Sign Up modal -->
+<div class="modal fade bs-example-modal-sm" id="SignUp-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header no-border">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4>Sign up with your Social Security ID:</h4>
+            </div>
+
+            <div class="modal-body text-left">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <label for="SsIds">Social Security ID:</label>
+                            <input type="text" class="form-control" id="SsIds" placeholder="Social Security ID:">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <label for="phoneNumberId">Phone Number:</label>
+                            <input type="text" class="form-control" id="phoneNumberId" placeholder="Phone Number">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <label for="emailId">Email:</label>
+                            <input type="text" class="form-control" id="emailId" placeholder="Email">
+                        </div>
+                    </div>
+                    <br />
+
+                    <div class="row">
+                        <div class="col-sm-1">
+                            <button type="button" id="signUp-btn-accept" data-loading-text="Loading..." class="btn btn-primary">
+                                Sign Up
+                            </button>
+                        </div>
+                        <div class="col-sm-1">
+                            <a href="" id="cancel-signUp-btn" class="btn btn-default" data-dismiss="modal" data-target="#login-modal">Cancelar</a>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <p id="emailSendPLabelSignUp" style="color:red">A email was send to your email account.</p>
+                            <button type="button" id="okButtonSignUp" data-loading-text="Loading..." class="btn btn-primary">
+                                Ok
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Sign In modal -->
 <div class="modal fade bs-example-modal-sm" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
@@ -225,7 +184,9 @@
                 <br />
                 <div id="dontHaveAccountLabel">
                     <p>Don't have a account?</p>
-                    <a href="" id="signUpBtn" class="btn btn-default" data-dismiss="modal" data-target="#login-modal">Sign up now</a>
+                    <button type="button" id="signUpBtn" data-loading-text="Loading..." class="btn btn-primary">
+                        Sign up now
+                    </button>
                 </div>
                 <br />
             </div>
@@ -233,11 +194,6 @@
     </div>
 </div>
 
-
-@*    <div class="container">
-        <a href="" id="loginBtn" class="btn btn-default btn-lg" data-toggle="modal" data-target="#login-modal">Iniciar Sesion</a>
-    </div>
-*@
 
 <div class="modal fade" id="codeModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">

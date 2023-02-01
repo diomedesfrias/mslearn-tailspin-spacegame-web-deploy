@@ -34,6 +34,73 @@ $("#tableMenu p").on('click', function (e) {
 
 
 
+function signUpUserFlow() {
+
+    $("#signUpBtn").click(function () {
+        $('#login-modal').modal('hide');
+        $('#SignUp-modal').modal('show');
+    });
+
+    $("#signUp-btn-accept").click(function () {
+        $("#emailSendPLabelSignUp").show();
+        $("#cancel-signUp-btn").hide();
+        $("#signUp-btn-accept").hide();
+        $("#okButtonSignUp").show();
+    });
+
+    $("#okButtonSignUp").click(function () {
+        $('#SignUp-modal').modal('hide');
+        $('#codeModal').modal('show');
+    });
+}
+
+
+function loginUserFlow() {
+    $(document).ready(function () {
+        $("#logInfoContainer").hide();
+    });
+
+    signUpUserFlow();
+
+    $("#loginBtn").click(function () {
+        $("#emailSendPLabelSignUp").hide();
+        $("#emailSendPLabel").hide();
+        $("#okButton").hide();
+        $("#okButtonSignUp").hide();
+        $('#login-modal').modal('show');
+    });
+
+    $("#login-btn-accept").click(function () {
+        $("#emailSendPLabel").show();
+        $("#login-btn-accept").hide();
+        $("#okButton").show();
+        $("#signUpBtn").hide();
+        $("#cancel-login-btn").hide();
+        $("#dontHaveAccountLabel").hide();
+        $("#value").prop("disabled", true);
+        $("#userName").prop("disabled", true);
+    });
+
+    $("#okButton").click(function () {
+        $('#login-modal').modal('hide');
+        $('#codeModal').modal('show');
+    });
+
+    $("#continueCodeBtn").click(function () {
+        $('#codeModal').modal('hide');
+        $('#welcomeModal').modal('show');
+    });
+
+    $("#welcomeAcceptBtn").click(function () {
+        $('#welcomeModal').modal('hide');
+        $("#loginBtn").hide();
+
+        var userName = $("#userName").val();
+        $("#userNameLabel").text(userName);
+        $("#logInfoContainer").show();
+    });
+}
+
 function fillTable() {
     //table definitions
     var tableDiv = $("#tableDiv");
@@ -53,7 +120,7 @@ function fillTable() {
 
     else {
         var projects2 = [];
-         
+
         switch (searchType) {
             case 'Name':
                 projects2 = projects.filter(
@@ -110,46 +177,3 @@ $(document).ready(function () {
     loginUserFlow();
     fillTable();
 });
-
-
-function loginUserFlow() {
-    $(document).ready(function () {
-        $("#logInfoContainer").hide();
-    });
-
-    $("#loginBtn").click(function () {
-        $("#emailSendPLabel").hide();
-        $("#okButton").hide();
-        $('#login-modal').modal('show');
-    });
-
-    $("#login-btn-accept").click(function () {
-        $("#emailSendPLabel").show();
-        $("#login-btn-accept").hide();
-        $("#okButton").show();
-        $("#signUpBtn").hide();
-        $("#cancel-login-btn").hide();
-        $("#dontHaveAccountLabel").hide();
-        $("#value").prop("disabled", true);
-        $("#userName").prop("disabled", true);
-    });
-
-    $("#okButton").click(function () {
-        $('#login-modal').modal('hide');
-        $('#codeModal').modal('show');
-    });
-
-    $("#continueCodeBtn").click(function () {
-        $('#codeModal').modal('hide');
-        $('#welcomeModal').modal('show');
-    });
-
-    $("#welcomeAcceptBtn").click(function () {
-        $('#welcomeModal').modal('hide');
-        $("#loginBtn").hide();
-
-        var userName = $("#userName").val();
-        $("#userNameLabel").text(userName);
-        $("#logInfoContainer").show();
-    });
-}
